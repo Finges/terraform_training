@@ -24,18 +24,6 @@ terraform {
     name = "chrisatconcur/training"
    }
 }
-provider "dnsimple" {
-  token = "awesometoken"
-  account = "awesomeaccount"
-}
-
-resource "dnsimple_record" "awesomednsrecord" {
-  domain = "www.awesomednsrecord.com" 
-  name = "awesomednsrecord"
-  value = "${aws_instance.web.0.public_ip}"
-  type = "A"
-  ttl = 3600
-}
 
 provider "aws" {
   access_key = "${var.aws_access_key}"
@@ -44,7 +32,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "web" {
-  count                  = 2
+  count                  = 1
   ami                    = "ami-1d4e7a66"
   instance_type          = "t2.micro"
   subnet_id              = "subnet-77f9d52d"
